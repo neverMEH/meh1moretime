@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Ads Token Manager</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fab fa-amazon"></i>
+                <span>Amazon Ads Token Manager</span>
+            </div>
+            <div class="nav-menu">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+                <a href="/docs" class="nav-link">API Docs</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Secure OAuth2 Token Management</h1>
+            <p class="hero-subtitle">Connect and manage your Amazon Advertising accounts with automatic token refresh and enterprise-grade security.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-lock feature-icon"></i>
+                    <h3>Secure Storage</h3>
+                    <p>All tokens encrypted with military-grade encryption before storage in Supabase.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sync-alt feature-icon"></i>
+                    <h3>Auto-Refresh</h3>
+                    <p>Tokens automatically refresh before expiration, ensuring zero downtime.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>Multi-Account</h3>
+                    <p>Manage multiple Amazon Advertising accounts from a single dashboard.</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <button id="connectBtn" class="btn-primary">
+                    <i class="fab fa-amazon"></i>
+                    Connect Amazon Account
+                </button>
+                <button id="dashboardBtn" class="btn-secondary">
+                    <i class="fas fa-chart-line"></i>
+                    View Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Account Modal -->
+    <div id="addAccountModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Connect Amazon Advertising Account</h2>
+            <p class="modal-subtitle">Enter your Amazon Advertising API credentials to get started.</p>
+
+            <form id="accountForm">
+                <div class="form-group">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" id="accountName" name="accountName" required
+                           placeholder="e.g., My Amazon Store">
+                    <small>A friendly name to identify this account</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientId">Client ID</label>
+                    <input type="text" id="clientId" name="clientId" required
+                           placeholder="amzn1.application-oa2-client.xxxxx">
+                    <small>From your Amazon Advertising API application</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientSecret">Client Secret</label>
+                    <input type="password" id="clientSecret" name="clientSecret" required
+                           placeholder="Your client secret">
+                    <small>Keep this secure - it will be encrypted</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="redirectUri">Redirect URI (Optional)</label>
+                    <input type="url" id="redirectUri" name="redirectUri"
+                           placeholder="https://localhost" value="https://localhost">
+                    <small>Must match your app configuration in Amazon</small>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Create Account
+                    </button>
+                    <button type="button" class="btn-secondary" id="cancelBtn">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <h2><i class="fas fa-check-circle"></i> Account Created!</h2>
+            <p>Your account has been created successfully. Now you need to authorize it with Amazon.</p>
+            <button id="authorizeBtn" class="btn-primary">
+                <i class="fas fa-external-link-alt"></i>
+                Authorize with Amazon
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Amazon Ads Token Manager | Built with FastAPI & Supabase | Deployed on Railway</p>
+            <div class="footer-links">
+                <a href="/docs">API Documentation</a>
+                <a href="https://github.com/your-repo">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

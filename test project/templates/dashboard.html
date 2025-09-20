@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Amazon Ads Token Manager</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fab fa-amazon"></i>
+                <span>Amazon Ads Token Manager</span>
+            </div>
+            <div class="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/dashboard" class="nav-link active">Dashboard</a>
+                <a href="/docs" class="nav-link">API Docs</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Account Dashboard</h1>
+            <button id="addAccountBtn" class="btn-primary">
+                <i class="fas fa-plus"></i>
+                Add Account
+            </button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="totalAccounts">0</h3>
+                    <p>Total Accounts</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon active">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="activeTokens">0</h3>
+                    <p>Active Tokens</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warning">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="expiringTokens">0</h3>
+                    <p>Expiring Soon</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="expiredTokens">0</h3>
+                    <p>Expired</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="accounts-section">
+            <h2>Your Accounts</h2>
+            <div id="accountsList" class="accounts-grid">
+                <!-- Account cards will be dynamically inserted here -->
+            </div>
+
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fas fa-folder-open"></i>
+                <h3>No accounts yet</h3>
+                <p>Connect your first Amazon Advertising account to get started.</p>
+                <button class="btn-primary" onclick="window.location.href='/'">
+                    <i class="fas fa-plus"></i>
+                    Add Your First Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Details Modal -->
+    <div id="accountModal" class="modal">
+        <div class="modal-content large-modal">
+            <span class="close">&times;</span>
+            <h2>Account Details</h2>
+
+            <div id="accountDetails">
+                <!-- Details will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- OAuth Callback Modal -->
+    <div id="oauthModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Complete Authorization</h2>
+            <p>After authorizing with Amazon, paste the authorization code below:</p>
+
+            <form id="oauthForm">
+                <div class="form-group">
+                    <label for="authCode">Authorization Code</label>
+                    <input type="text" id="authCode" name="authCode" required
+                           placeholder="Paste the code from Amazon here">
+                    <small>The code appears in the URL after ?code=</small>
+                </div>
+                <input type="hidden" id="accountId" name="accountId">
+
+                <div class="button-group">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-check"></i>
+                        Complete Setup
+                    </button>
+                    <button type="button" class="btn-secondary close-modal">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Amazon Ads Token Manager | Secure Token Management</p>
+        </div>
+    </footer>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>

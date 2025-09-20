@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization - Amazon Ads Token Manager</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="callback-container">
+        <div class="callback-card">
+            <div class="callback-header">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h1>Authorization Successful!</h1>
+            </div>
+
+            <div class="callback-content">
+                <p>We've received your authorization code from Amazon.</p>
+                <p>Processing your tokens...</p>
+
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <div id="statusMessage" class="status-message">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Exchanging authorization code for access tokens...
+                </div>
+            </div>
+
+            <div id="successContent" class="success-content" style="display: none;">
+                <h3><i class="fas fa-check"></i> Setup Complete!</h3>
+                <p>Your account has been successfully connected and tokens have been stored securely.</p>
+
+                <div class="token-info">
+                    <div class="info-item">
+                        <span class="info-label">Account:</span>
+                        <span id="accountName">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Token Expires:</span>
+                        <span id="tokenExpiry">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span class="badge badge-success">Active</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="window.location.href='/dashboard'" class="btn-primary">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Go to Dashboard
+                    </button>
+                    <button onclick="copyToken()" class="btn-secondary">
+                        <i class="fas fa-copy"></i>
+                        Copy Access Token
+                    </button>
+                </div>
+            </div>
+
+            <div id="errorContent" class="error-content" style="display: none;">
+                <h3><i class="fas fa-exclamation-circle"></i> Authorization Failed</h3>
+                <p id="errorMessage">An error occurred during authorization.</p>
+
+                <div class="button-group">
+                    <button onclick="retryAuth()" class="btn-primary">
+                        <i class="fas fa-redo"></i>
+                        Try Again
+                    </button>
+                    <button onclick="window.location.href='/dashboard'" class="btn-secondary">
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/callback.js"></script>
+</body>
+</html>
